@@ -15,11 +15,6 @@ public:
 	// Sets default values for this actor's properties
 	AActorTEST();
 
-	UPROPERTY(VisibleAnywhere, Category = "Components")
-		USceneComponent* CustomRootComponent;
-
-	UPROPERTY(VisibleAnywhere, Category = "Components")
-		UStaticMeshComponent* GrabableStaticMesh;
 
 protected:
 	// Called when the game starts or when spawned
