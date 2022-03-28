@@ -29,6 +29,7 @@ AVR_BaseThrowable::AVR_BaseThrowable()
 void AVR_BaseThrowable::BeginPlay()
 {
 	Super::BeginPlay();
+    Getsdasd
 	
 }
 
