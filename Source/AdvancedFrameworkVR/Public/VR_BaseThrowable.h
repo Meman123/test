@@ -19,36 +19,51 @@ protected:
 	UPROPERTY(VisibleAnywhere, Category = "Components")
 		USceneComponent* CustomRootComponent;
 
-	UPROPERTY(VisibleAnywhere, Category = "Components")
+	UPROPERTY(VisibleAnywhere, BlueprintReadWrite, Category = "Components")
 		UStaticMeshComponent* GrenadeBody;
 
-	UPROPERTY(VisibleAnywhere, Category = "Components")
+	UPROPERTY(VisibleAnywhere, BlueprintReadWrite, Category = "Components")
 		UStaticMeshComponent* GrenadeLever;
 
-	UPROPERTY(VisibleAnywhere, Category = "Components")
+	UPROPERTY(VisibleAnywhere, BlueprintReadWrite, Category = "Components")
 		UStaticMeshComponent* GrenadePin;
 
 protected:
 
+	FTimerHandle THDragCooldown;
+
+	FTimerHandle THExplosionSecuence;
+
+	FTimerHandle THExplosion;
+
+	UFUNCTION()
+		void DragCooldown();
+
+	UFUNCTION()
+		void ExplosionSecuence();
+
+	
+	
+
 
 public:
 
-	UPROPERTY(BlueprintReadWrite, Category = "Grenade")
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "DefaultVariables")
 		bool bPinSacado;
 
-	UPROPERTY(BlueprintReadWrite, Category = "Grenade")
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "DefaultVariables")
 		bool bDragCooldown;
 
-	UPROPERTY(BlueprintReadWrite, Category = "Grenade")
+	UPROPERTY(EditDefaultsOnly, BlueprintReadWrite, Category = "DefaultVariables")
 		bool bReleased;
 
-	UPROPERTY(EditAnyWhere, BlueprintReadWrite, Category = "Grenade")
+	UPROPERTY(EditAnyWhere, BlueprintReadWrite, Category = "Grenade Setup")
 		float GrenadeExplosionTime;
 
-	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Grenade")
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Grenade Setup")
 		UParticleSystem*ExplosionParticle;
 
-	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Grenade")
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Grenade Setup")
 		USoundCue*ExplosionSound;
 
 
@@ -56,6 +71,8 @@ public:
 	// Sets default values for this actor's properties
 	AVR_BaseThrowable();
 
+	
+	
 
 protected:
 	// Called when the game starts or when spawned

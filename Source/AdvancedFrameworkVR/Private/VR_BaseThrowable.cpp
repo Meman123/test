@@ -2,6 +2,9 @@
 
 
 #include "VR_BaseThrowable.h"
+#include "Kismet/GameplayStatics.h"
+
+
 
 // Sets default values
 AVR_BaseThrowable::AVR_BaseThrowable()
@@ -23,13 +26,20 @@ AVR_BaseThrowable::AVR_BaseThrowable()
 
 	
 
+	
+
 }
 
 // Called when the game starts or when spawned
 void AVR_BaseThrowable::BeginPlay()
 {
 	Super::BeginPlay();
-    Getsdasd
+
+	GetWorld()->GetTimerManager().SetTimer(THDragCooldown, this, &AVR_BaseThrowable::DragCooldown, 0.2f, false);
+
+	
+
+    
 	
 }
 
@@ -38,5 +48,31 @@ void AVR_BaseThrowable::Tick(float DeltaTime)
 {
 	Super::Tick(DeltaTime);
 
+	if (bPinSacado)
+	{
+		GetWorld()->GetTimerManager().SetTimer(THExplosion, this, &AVR_BaseThrowable::ExplosionSecuence, GrenadeExplosionTime, false);
+	}
+
 }
+
+
+void AVR_BaseThrowable::DragCooldown()
+{
+	bDragCooldown = true;
+}
+
+void AVR_BaseThrowable::ExplosionSecuence()
+{
+	UGameplayStatics::SpawnEmitterAtLocation(GetWorld(), ExplosionParticle, GetActorLocation());
+	UGameplayStatics::SpawnSoundAtLocation(GetWorld(), ExplosionSound, GetActorLocation());
+
+	TArray<AActor*> Ignored;
+	UGameplayStatics::ApplyRadialDamage(GetWorld(), 100, GetActorLocation(), 500, UDamageType::StaticClass(), Ignored, this, nullptr, false, ECollisionChannel::ECC_Visibility);
+	Destroy();
+
+}
+
+
+
+
 
