@@ -12,18 +12,16 @@ UCLASS()
 class ADVANCEDFRAMEWORKVR_API AVR_EnemyWeapon : public AActor
 {
 	GENERATED_BODY()
-	
-public:	
+
+public:
 	// Sets default values for this actor's properties
 	AVR_EnemyWeapon();
-
-	void Fire();
 
 	void StartFire();
 
 	void Stopfire();
 
-	
+
 
 protected:
 
@@ -31,17 +29,25 @@ protected:
 		UStaticMeshComponent* WeaponMesh;
 
 	UPROPERTY(EditDefaultsOnly)
-	float ShotDistance;
+		float ShotDistance;
 
 	UPROPERTY(EditDefaultsOnly)
 		float ShotDamage;
 
 	float TimeBetweenShots;
 
+	float LastFireTime;
+
 	FTimerHandle TimerHandle_Autoshot;
 
-	UPROPERTY(EditDefaultsOnly, meta = (ClampMin=0.1f))
-	float RoundsPerMinute;
+	UPROPERTY(EditDefaultsOnly, meta = (ClampMin = 0.1f))
+		float RoundsPerMinute;
+
+
+	//aquivoy
+
+	UPROPERTY(EditDefaultsOnly)
+	bool bDrawDebug();
 
 	UPROPERTY(EditDefaultsOnly)
 	TSubclassOf<UDamageType>  DamageType;

@@ -37,7 +37,15 @@ void AVR_BaseCharacter::StartFire()
 {
 	if (CurrentWeapon)
 	{
-		CurrentWeapon->Fire();
+		CurrentWeapon->StartFire();
+	}
+}
+
+void AVR_BaseCharacter::StopFire()
+{
+	if (CurrentWeapon)
+	{
+		CurrentWeapon->Stopfire();
 	}
 }
 

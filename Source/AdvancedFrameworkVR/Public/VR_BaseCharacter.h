@@ -31,11 +31,14 @@ public:
 	UFUNCTION(BlueprintCallable)
 		void StartFire();
 
+	UFUNCTION(BlueprintCallable)
+		void StopFire();
+
 protected:
 	// Called when the game starts or when spawned
 	virtual void BeginPlay() override;
 	
-	//virtual FVector GetPawnViewLocation() const override;
+	
 
 
 	

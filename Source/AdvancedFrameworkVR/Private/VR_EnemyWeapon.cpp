@@ -17,6 +17,9 @@ AVR_EnemyWeapon::AVR_EnemyWeapon()
 
 	ShotDistance = 10000.0f;
 	ShotDamage = 20.0f;
+	RoundsPerMinute = 600.0f;
+	bDrawDebug = false;
+
 }
 
 // Called when the game starts or when spawned
@@ -27,6 +30,7 @@ void AVR_EnemyWeapon::BeginPlay()
 	TimeBetweenShots = 60 / RoundsPerMinute;
 	
 }
+
 
 
 
@@ -60,16 +64,20 @@ void AVR_EnemyWeapon::Fire()
 		}
 
 	}
-	
+	LastFireTime = GetWorld()->TimeSeconds;
 }
 
 void AVR_EnemyWeapon::StartFire()
 {
+
+	float FirstDelay = FMath::Max(0.0f, LastFireTime + TimeBetweenShots - GetWorld()->TimeSeconds);
 	GetWorldTimerManager().SetTimer(TimerHandle_Autoshot,this, &AVR_EnemyWeapon::Fire, TimeBetweenShots, 0.0f);
 }
 
 void AVR_EnemyWeapon::Stopfire()
 {
+
+	GetWorldTimerManager().ClearTimer(TimerHandle_Autoshot);
 }
 
 
