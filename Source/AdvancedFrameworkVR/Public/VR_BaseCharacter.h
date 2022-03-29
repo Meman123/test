@@ -6,10 +6,23 @@
 #include "GameFramework/Character.h"
 #include "VR_BaseCharacter.generated.h"
 
+class AVR_EnemyWeapon;
+
 UCLASS()
 class ADVANCEDFRAMEWORKVR_API AVR_BaseCharacter : public ACharacter
 {
 	GENERATED_BODY()
+
+		UPROPERTY(EditDefaultsOnly)
+		TSubclassOf<AVR_EnemyWeapon> StartingWeaponClass;
+
+	UPROPERTY(EditDefaultsOnly)
+		FName WeaponSocketName;
+
+	UPROPERTY(EditDefaultsOnly)
+		AVR_EnemyWeapon*CurrentWeapon;
+
+
 
 public:
 	// Sets default values for this character's properties
@@ -19,9 +32,6 @@ protected:
 	// Called when the game starts or when spawned
 	virtual void BeginPlay() override;
 
-public:	
-	// Called every frame
-	virtual void Tick(float DeltaTime) override;
 
 	
 
