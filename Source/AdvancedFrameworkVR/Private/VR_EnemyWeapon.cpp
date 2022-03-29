@@ -3,6 +3,8 @@
 
 #include "VR_EnemyWeapon.h"
 #include "Components/StaticMeshComponent.h"
+#include "kismet/GameplayStatics.h"
+#include "DrawDebugHelpers.h"
 #include <AdvancedFrameworkVR/AdvancedFrameworkVR.h>
 
 // Sets default values
@@ -14,6 +16,7 @@ AVR_EnemyWeapon::AVR_EnemyWeapon()
 	RootComponent = WeaponMesh;
 
 	ShotDistance = 10000.0f;
+	ShotDamage = 20.0f;
 }
 
 // Called when the game starts or when spawned
@@ -47,6 +50,10 @@ void AVR_EnemyWeapon::Fire()
 		FHitResult Hit;
 		if (GetWorld()->LineTraceSingleByChannel(Hit, EyeLocation, TraceEnd, WEAPON_COLLISION, QueryParams))
 		{
+
+			AActor* HitActor = Hit.GetActor();
+			UGameplayStatics::ApplyPointDamage(HitActor, ShotDamage, ShotDirection, Hit, MyOwner->GetInstigatorController(), MyOwner, DamageType);
+			DrawDebugLine(GetWorld(), EyeLocation, Hit.ImpactPoint, FColor::White, false, 1.0f, 0, 1.0f);
 
 		}
 

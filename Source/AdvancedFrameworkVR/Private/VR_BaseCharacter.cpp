@@ -14,6 +14,8 @@ AVR_BaseCharacter::AVR_BaseCharacter()
 
 }
 
+
+
 // Called when the game starts or when spawned
 void AVR_BaseCharacter::BeginPlay()
 {
@@ -24,22 +26,22 @@ void AVR_BaseCharacter::BeginPlay()
 		CurrentWeapon = GetWorld()->SpawnActor<AVR_EnemyWeapon>(StartingWeaponClass, FVector::ZeroVector, FRotator::ZeroRotator);
 		if (IsValid(CurrentWeapon))
 		{
+			CurrentWeapon->SetOwner(this);
 			CurrentWeapon->AttachToComponent(GetMesh(), FAttachmentTransformRules::SnapToTargetIncludingScale, WeaponSocketName);
 		}
 	}
 	
 }
 
-//FVector AVR_BaseCharacter::GetPawnViewLocation() const
-//{
-//if(IsValid(CameraComponent))
-//{
-  //  return CameraComponent->GetComponentLocation();
-//}
+void AVR_BaseCharacter::StartFire()
+{
+	if (CurrentWeapon)
+	{
+		CurrentWeapon->Fire();
+	}
+}
 
-//return Super::GetPawnViewLocation();
 
-//}
 
 
 

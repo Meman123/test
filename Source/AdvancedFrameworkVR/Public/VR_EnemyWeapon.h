@@ -28,6 +28,12 @@ protected:
 
 	UPROPERTY(EditDefaultsOnly)
 	float ShotDistance;
+
+	UPROPERTY(EditDefaultsOnly)
+		float ShotDamage;
+
+	UPROPERTY(EditDefaultsOnly)
+	TSubclassOf<UDamageType>  DamageType;
 	
 	// Called when the game starts or when spawned
 	virtual void BeginPlay() override;
