@@ -3,3 +3,12 @@
 
 #include "VR_Enemy.h"
 
+
+
+
+
+
+FVector AVR_Enemy::GetPawnViewLocation() const
+{
+	return Super::GetPawnViewLocation();
+}

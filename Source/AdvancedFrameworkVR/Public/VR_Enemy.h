@@ -13,5 +13,8 @@ UCLASS()
 class ADVANCEDFRAMEWORKVR_API AVR_Enemy : public AVR_BaseCharacter
 {
 	GENERATED_BODY()
-	
+
+
+
+		virtual FVector GetPawnViewLocation() const override;
 };

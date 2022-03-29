@@ -30,6 +30,16 @@ void AVR_BaseCharacter::BeginPlay()
 	
 }
 
+//FVector AVR_BaseCharacter::GetPawnViewLocation() const
+//{
+//if(IsValid(CameraComponent))
+//{
+  //  return CameraComponent->GetComponentLocation();
+//}
+
+//return Super::GetPawnViewLocation();
+
+//}
 
 
 
