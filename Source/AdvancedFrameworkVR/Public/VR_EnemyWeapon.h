@@ -19,6 +19,10 @@ public:
 
 	void Fire();
 
+	void StartFire();
+
+	void Stopfire();
+
 	
 
 protected:
@@ -32,8 +36,17 @@ protected:
 	UPROPERTY(EditDefaultsOnly)
 		float ShotDamage;
 
+	float TimeBetweenShots;
+
+	FTimerHandle TimerHandle_Autoshot;
+
+	UPROPERTY(EditDefaultsOnly, meta = (ClampMin=0.1f))
+	float RoundsPerMinute;
+
 	UPROPERTY(EditDefaultsOnly)
 	TSubclassOf<UDamageType>  DamageType;
+
+	void Fire();
 	
 	// Called when the game starts or when spawned
 	virtual void BeginPlay() override;

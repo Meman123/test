@@ -23,6 +23,8 @@ AVR_EnemyWeapon::AVR_EnemyWeapon()
 void AVR_EnemyWeapon::BeginPlay()
 {
 	Super::BeginPlay();
+
+	TimeBetweenShots = 60 / RoundsPerMinute;
 	
 }
 
@@ -59,6 +61,15 @@ void AVR_EnemyWeapon::Fire()
 
 	}
 	
+}
+
+void AVR_EnemyWeapon::StartFire()
+{
+	GetWorldTimerManager().SetTimer(TimerHandle_Autoshot,this, &AVR_EnemyWeapon::Fire, TimeBetweenShots, 0.0f);
+}
+
+void AVR_EnemyWeapon::Stopfire()
+{
 }
 
 
