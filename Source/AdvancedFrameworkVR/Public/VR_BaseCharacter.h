@@ -6,6 +6,8 @@
 #include "GameFramework/Character.h"
 #include "VR_BaseCharacter.generated.h"
 
+class UVR_HealthComponent;
+
 class AVR_EnemyWeapon;
 
 UCLASS()
@@ -13,26 +15,36 @@ class ADVANCEDFRAMEWORKVR_API AVR_BaseCharacter : public ACharacter
 {
 	GENERATED_BODY()
 
-		UPROPERTY(EditDefaultsOnly)
+	
+
+public:
+	// Sets default values for this character's properties
+	AVR_BaseCharacter();
+
+
+	UPROPERTY(EditDefaultsOnly)
 		TSubclassOf<AVR_EnemyWeapon> StartingWeaponClass;
 
 	UPROPERTY(EditDefaultsOnly)
 		FName WeaponSocketName;
 
 	UPROPERTY(EditDefaultsOnly)
-		AVR_EnemyWeapon*CurrentWeapon;
+		AVR_EnemyWeapon* CurrentWeapon;
 
-
-
-public:
-	// Sets default values for this character's properties
-	AVR_BaseCharacter();
+	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly)
+		UVR_HealthComponent* HealthComponent;
 
 	UFUNCTION(BlueprintCallable)
 		void StartFire();
 
 	UFUNCTION(BlueprintCallable)
 		void StopFire();
+
+	UFUNCTION()
+		void OnHealthChanged(UVR_HealthComponent* HealthComp, float Health, float HealthDelta, const class UDamageType* DamageType, class AController* InstigatedBy, AActor* DamageCauser);
+
+	UFUNCTION()
+	void OnDeath(UVR_HealthComponent* HealthComp, class AController* InstigatedBy, AActor* Killer);
 
 protected:
 	// Called when the game starts or when spawned
