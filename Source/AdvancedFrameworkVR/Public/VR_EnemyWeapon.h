@@ -7,6 +7,7 @@
 #include "VR_EnemyWeapon.generated.h"
 
 class UStaticMeshComponent;
+class UParticleSystem;
 
 UCLASS()
 class ADVANCEDFRAMEWORKVR_API AVR_EnemyWeapon : public AActor
@@ -47,7 +48,22 @@ protected:
 	//aquivoy
 
 	UPROPERTY(EditDefaultsOnly)
-	bool bDrawDebug();
+	bool bDrawDebug;
+
+	UPROPERTY(EditDefaultsOnly)
+		UParticleSystem* ImpactEffect;
+
+	UPROPERTY(EditDefaultsOnly)
+		UParticleSystem* MuzzleFlash;
+
+	UPROPERTY(EditDefaultsOnly)
+		UParticleSystem* TracerEffect;
+
+	UPROPERTY(EditDefaultsOnly)
+		FName MuzzleSocketName;
+
+	UPROPERTY(EditDefaultsOnly)
+		FName TracerTargetName;
 
 	UPROPERTY(EditDefaultsOnly)
 	TSubclassOf<UDamageType>  DamageType;

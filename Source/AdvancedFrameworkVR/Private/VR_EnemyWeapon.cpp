@@ -5,6 +5,7 @@
 #include "Components/StaticMeshComponent.h"
 #include "kismet/GameplayStatics.h"
 #include "DrawDebugHelpers.h"
+#include "particles/ParticleSystemComponent.h"
 #include <AdvancedFrameworkVR/AdvancedFrameworkVR.h>
 
 // Sets default values
@@ -53,16 +54,42 @@ void AVR_EnemyWeapon::Fire()
 		QueryParams.AddIgnoredActor(this);
 		QueryParams.bTraceComplex = true;
 
+		FVector ImpactPoint = TraceEnd;
+
 		FHitResult Hit;
 		if (GetWorld()->LineTraceSingleByChannel(Hit, EyeLocation, TraceEnd, WEAPON_COLLISION, QueryParams))
 		{
 
 			AActor* HitActor = Hit.GetActor();
 			UGameplayStatics::ApplyPointDamage(HitActor, ShotDamage, ShotDirection, Hit, MyOwner->GetInstigatorController(), MyOwner, DamageType);
-			DrawDebugLine(GetWorld(), EyeLocation, Hit.ImpactPoint, FColor::White, false, 1.0f, 0, 1.0f);
+			
+			if (ImpactEffect)
+			{
+				UGameplayStatics::SpawnEmitterAtLocation(GetWorld(), ImpactEffect, Hit.ImpactPoint, Hit.ImpactNormal.Rotation());
+			}
+			//DrawDebugLine(GetWorld(), EyeLocation, Hit.ImpactPoint, FColor::White, false, 1.0f, 0, 1.0f);
 
+			ImpactPoint = Hit.ImpactPoint;
 		}
 
+		if (bDrawDebug)
+		{
+			DrawDebugLine(GetWorld(), EyeLocation, Hit.ImpactPoint, FColor::White, false, 1.0f, 0, 1.0f);
+		}
+
+		if (MuzzleFlash)
+		{
+			UGameplayStatics::SpawnEmitterAttached(MuzzleFlash, WeaponMesh, MuzzleSocketName);
+		}
+
+		if (TracerEffect)
+		{
+			UParticleSystemComponent* tracerComponent = UGameplayStatics::SpawnEmitterAttached(TracerEffect, WeaponMesh, MuzzleSocketName);
+			if (tracerComponent)
+			{
+				tracerComponent->SetVectorParameter(TracerTargetName, ImpactPoint);
+			}
+		}
 	}
 	LastFireTime = GetWorld()->TimeSeconds;
 }
