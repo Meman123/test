@@ -12,15 +12,17 @@ UCLASS()
 class ADVANCEDFRAMEWORKVR_API AVR_PatrolActor : public AActor
 {
 	GENERATED_BODY()
-	
-public:	
+
+public:
 	// Sets default values for this actor's properties
 	AVR_PatrolActor();
 
-	USplineComponent * SplineComponent;
+	USplineComponent* SplineComponent;
 
+	UFUNCTION(BlueprintCallable)
 	FVector GetWorldLocationByIndex(const int32 Index) const;
 
+	UFUNCTION(BlueprintCallable)
 	int32 GetLastIndex() const;
 
 
