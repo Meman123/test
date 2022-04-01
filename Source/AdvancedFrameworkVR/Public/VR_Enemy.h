@@ -23,5 +23,5 @@ public:
 
 
 
-		virtual FVector GetPawnViewLocation() const override;
+	virtual FVector GetPawnViewLocation() const override;
 };

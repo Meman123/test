@@ -12,11 +12,21 @@ AVR_PatrolActor::AVR_PatrolActor()
 	SplineComponent = CreateDefaultSubobject<USplineComponent>(TEXT("SplineComponent"));
 }
 
+
+// Called when the game starts or when spawned
+void AVR_PatrolActor::BeginPlay()
+{
+	Super::BeginPlay();
+	
+}
+
 FVector AVR_PatrolActor::GetWorldLocationByIndex(const int32 Index) const
 {
 	if (SplineComponent && Index <= GetLastIndex())
 	{
-		SplineComponent->GetLocationAtSplinePoint(Index, ESplineCoordinateSpace::World);
+		return SplineComponent->GetLocationAtSplinePoint(Index, ESplineCoordinateSpace::World);
+		//SplineComponent->GetLocationAtSplinePoint(Index, ESplineCoordinateSpace::World);
+		//SplineComponent->GetWorldLocationAtSplinePoint(Index);
 	}
 	return GetActorLocation();
 }
@@ -25,16 +35,11 @@ int32 AVR_PatrolActor::GetLastIndex() const
 {
 	if (SplineComponent)
 	{
-		SplineComponent->GetNumberOfSplinePoints();
+		int32 PointNum;
+		PointNum = SplineComponent->GetNumberOfSplinePoints();
+		return PointNum;
 	}
 	return 0;
-}
-
-// Called when the game starts or when spawned
-void AVR_PatrolActor::BeginPlay()
-{
-	Super::BeginPlay();
-	
 }
 
 

@@ -17,6 +17,7 @@ public:
 	// Sets default values for this actor's properties
 	AVR_PatrolActor();
 
+	UPROPERTY(EditAnywhere, BlueprintReadWrite)
 	USplineComponent* SplineComponent;
 
 	UFUNCTION(BlueprintCallable)
