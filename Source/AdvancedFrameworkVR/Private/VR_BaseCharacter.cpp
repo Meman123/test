@@ -12,7 +12,7 @@ AVR_BaseCharacter::AVR_BaseCharacter()
  	// Set this character to call Tick() every frame.  You can turn this off to improve performance if you don't need it.
 	PrimaryActorTick.bCanEverTick = false;
 	GetMovementComponent()->GetNavAgentPropertiesRef().bCanCrouch = true;
-	HealthComponent = CreateDefaultSubobject<UVR_HealthComponent>(TEXT("HealthComponent"));
+	//HealthComponent = CreateDefaultSubobject<UVR_HealthComponent>(TEXT("HealthComponent"));
 
 }
 

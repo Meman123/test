@@ -12,6 +12,7 @@ UVR_HealthComponent::UVR_HealthComponent()
 	DefaultHealth = 100.0f;
 	bDied = false;
 	
+	
 	// ...
 }
 
